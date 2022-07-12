@@ -1,35 +1,35 @@
 <?php
 interface Vehicle
 {
-    public function wash(): void;
+    public function driveInCarWash(): void;
 
 }
 
 class Car implements Vehicle
 {
-    public function wash(): void
+    public function driveInCarWash(): void
     {
-        var_dump("Car is washing...");
+        var_dump("Car is in line and will be washed");
     }
 }
 
 class Scooter implements Vehicle
 {
-    public function wash(): void
+    public function driveInCarWash(): void
     {
-        var_dump("Scooter is washing ...");
+        var_dump("Scooter is in line and will be washed");
     }
 }
 
 class Motocycle implements Vehicle
 {
-    public function wash():void
+    public function driveInCarWash():void
     {
-        var_dump("Motocycle is washing...");
+        var_dump("Motocycle is in line and will be washed");
     }
 }
 
-class CarWash
+class CarWashStation
 {
     /** @var Vehicle[] */
     private array $vehicles;
@@ -47,19 +47,20 @@ class CarWash
         $this->vehicles[] = $vehicle;
     }
 
-    public function driveInCarWash(): void
+    public function washAllVehicles(): void
     {
         foreach ($this->vehicles as $vehicle)
         {
-            $vehicle->wash();
+            $vehicle->driveInCarWash();
         }
     }
 }
 
-$carwash = new CarWash([
+$carWashPitStop = new CarWashStation([
     new Car(),
     new Scooter(),
     new Motocycle()
 ]);
 
-$carwash->driveInCarWash();
+$carWashPitStop->washAllVehicles();
+
