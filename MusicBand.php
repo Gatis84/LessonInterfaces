@@ -1,34 +1,33 @@
 <?php
 
-interface Orchester
+interface Conductor //diriģents
 {
-    /**
-     * @return void
-     */
     public function play():void;
 }
 
-class Guitar implements Orchester
+class Cello implements Conductor
 {
     public function play(): void
     {
-        echo "Guitar is making noise ..." . PHP_EOL;
+        echo "Cello supports the bass line of the ensemble" . PHP_EOL;
     }
 }
 
-class Drums implements Orchester
+class Harp implements Conductor
+
+//Arfas atskaņotāji atskaņo mūziku, nospiežot stīgas pareizā secībā un īstajā laikā.
 {
     public function play(): void
     {
-        echo "Drums do bang bang..." . PHP_EOL;
+        echo "Harp players play music by plucking the strings in the right order and at the right time." . PHP_EOL;
     }
 }
 
-class Vocal implements Orchester
+class Viola implements Conductor
 {
     public function play(): void
     {
-        echo "Vocal master does AAAaaaAAAaaaaa ..." . PHP_EOL;
+        echo "Violas are perfect foils to play rhythmic or harmonic accompaniments to the violins, leaving the second violins free to contribute to the melody" . PHP_EOL;
     }
 }
 
@@ -40,15 +39,17 @@ class MusicBand
     {
         $this->participants = $participants;
     }
+
+    public function StartConcert():void
+    {
+        /** @var Cello $participant */
+        foreach ($this->participants as $participant)
+        {
+            $participant->play();
+        }
+    }
 }
+$participants = [new Cello(), new Viola(), new Harp()];
 
-$guitar = new Guitar();
-$drums = new Drums();
-$vocal = new Vocal();
-
-$orchester = [$guitar, $drums, $vocal];
-
-foreach ($orchester as $participant)
-{
-    $participant->play();
-}
+$musicBand = new MusicBand($participants);
+$musicBand->StartConcert();
